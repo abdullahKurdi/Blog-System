@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <nav id="sidebar">
     <div class="sidebar-header">
-        <h3> <img src="/img/p1.jpg" id="admin-photo" alt="">Ayat Amine</h3>
+        <h3> <img src="{{asset('assets//img/p1.jpg')}}" id="admin-photo" alt="">Ayat Amine</h3>
     </div>
 
     <ul class="list-unstyled components">

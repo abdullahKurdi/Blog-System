@@ -28,7 +28,7 @@
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-fluid rounded" src="img/p1.jpg" style="width:900px;max-height:300px" alt="">
+                <img class="img-fluid rounded" src="{{asset('assets/img/p1.jpg')}}" style="width:900px;max-height:300px" alt="">
 
                 <hr>
 
