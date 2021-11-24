@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use App\Models\Category;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +16,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::whereHas('posts')->get();
+        if($category){
+            return response()->json($category);
+        }else{
+            return response()->json([
+                'status'=>404,
+                'msg'=>'Not Found'
+            ]);
+        }
     }
 
     /**
@@ -82,4 +92,6 @@ class CategoryController extends Controller
     {
         //
     }
+
+
 }

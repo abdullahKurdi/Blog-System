@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Route::get('posts', 'Frontend\PostController@index');
+Route::apiResource('posts', 'Frontend\PostController');
+Route::apiResource('categories', 'Frontend\CategoryController');
+Route::get('category/{slug}/posts', 'Frontend\PostController@categoryPost');
+
+
