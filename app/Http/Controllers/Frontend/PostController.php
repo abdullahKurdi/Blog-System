@@ -17,12 +17,23 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->get();
-        foreach ($posts as $post){
-            $post->setAttribute('add_at',$post->created_at->diffForHumans());
-            $post->setAttribute('comments_count',$post->comments->count());
+        $posts = Post::with('user')->paginate(5);
+
+        if($posts){
+            foreach ($posts as $post){
+                $post->setAttribute('add_at',$post->created_at->diffForHumans());
+                $post->setAttribute('comments_count',$post->comments->count());
+            }
+            return response()->json([
+                'status'=>200,
+                "data" =>$posts
+            ]);
+        }else{
+            return response()->json([
+                'status'=>200,
+                'msg'=>'There is no post'
+            ]);
         }
-        return response()->json($posts);
     }
 
     /**
@@ -156,5 +167,27 @@ class PostController extends Controller
             ]);
         }
 
+    }
+
+    public function searchPost($query){
+        $posts = Post::with('user')->where('title' ,'like','%'.$query.'%');
+        $postsNumber = count($posts->get());
+
+        if(intval($postsNumber) > 0){
+            foreach ($posts->get() as $post){
+                $post->setAttribute('add_at',$post->created_at->diffForHumans());
+                $post->setAttribute('comments_count',$post->comments->count());
+            }
+            $posts = $posts->paginate(intval($postsNumber));
+            return response()->json([
+                'status'=>200,
+                "data" =>$posts
+            ]);
+        }else{
+            return response()->json([
+                'status'=>404,
+                'msg'=>'There is no post'
+            ]);
+        }
     }
 }

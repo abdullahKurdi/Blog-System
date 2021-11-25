@@ -15,11 +15,3 @@
     </div>
 </template>
 
-<script>
-    export default {
-        name:'search',
-        mounted() {
-            console.log('Component mounted.')
-        },
-    }
-</script>
