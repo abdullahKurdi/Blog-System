@@ -67,6 +67,8 @@
         },methods:{
             submitLogin:function(){
                 console.log('submited')
+                let {email,password} = this;
+                this.$store.dispatch('loginUser',{email,password})
             }
         }
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,13 +25,14 @@ class AuthController extends Controller
             'email'=>$request->email,
             'password'=>$request->password,
         ];
-        if(auth()->attempt($credentials)){
+        $user = auth()->attempt($credentials);
+        if($user){
             $user_login_token= auth()->user()->createToken('Passport')->accessToken;
-            $response = ['token' => $user_login_token];
+            $response = ['status' =>200 ,'token' => $user_login_token];
             return response()->json($response, 200);
         }else {
-                $response = ['error' => 'UnAuthorised Access'];
-                return response()->json($response, 401);
+                $response = ['error' => 'UnAuthorised Access' , 'status' =>401];
+                return response()->json($response);
             }
 
     }

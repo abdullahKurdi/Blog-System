@@ -87,7 +87,10 @@
             }
         },methods:{
             submitRegister:function(){
-                console.log('submited')
+                // console.log('submited')
+                // console.log(this.$store.getters.isLogged)
+                let {firstname ,lastname,email,password} = this;
+                this.$store.dispatch('registerUser',{firstname ,lastname,email,password})
             }
         }
     }
