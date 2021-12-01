@@ -30,7 +30,7 @@
             <hr>
 
             <!-- Comments Form -->
-            <div class="card my-4">
+            <div class="card my-4" v-if="isLogged">
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
                     <form>
@@ -54,7 +54,7 @@
         </div>
                 <!-- Sidebar Widgets Column -->
         </div>
-        
+
     </div>
 
     <div v-else>
@@ -87,7 +87,7 @@
             getPost:function(){
                 axios.get('/api/posts/'+this.$route.params.slug)
                     .then(res => {
-                        this.post = res.data; 
+                        this.post = res.data;
                         this.post_id =this.post.data.id
                         this.comments = this.post.data.comments
                         })
@@ -110,13 +110,13 @@
         computed:{
             isLogged(){
                 return this.$store.getters.isLogged;
-            }    
+            }
         },
         computed:{
             isLogged(){
                 return this.$store.getters.isLogged;
-            }    
+            }
         }
-        
+
     }
 </script>

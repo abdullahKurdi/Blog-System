@@ -9,7 +9,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active" v-if="isAdmin">
-                            
+
                             <router-link class="nav-link" :to="'/admin'">admin
                                 <span class="sr-only">(current)</span>
                             </router-link>
@@ -19,7 +19,7 @@
                             <!-- <router-link :to="'/'"> home</router-link> -->
                         </li>
                         <li class="nav-item active">
-                            
+
                             <router-link class="nav-link" :to="'/'">Home
                                 <span class="sr-only">(current)</span>
                             </router-link>
@@ -63,6 +63,7 @@
 import Register from './RegisterComponent'
 import Login from './LoginComponent'
     export default {
+
         name:'home',
         components:{
             Register,
@@ -83,13 +84,13 @@ import Login from './LoginComponent'
         methods:{
             updateToken(){
                 let token = JSON.parse(localStorage.getItem('userToken'));
-                
+
                 if(token){
                 this.$store.commit('userLoggedin',token);}
             },
             setUser(){
                 let token = JSON.parse(localStorage.getItem('userToken'));
-                
+
                 if(token){
                 axios.get('/api/user')
                 .then(res => {

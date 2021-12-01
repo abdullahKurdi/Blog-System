@@ -2688,6 +2688,7 @@ __webpack_require__.r(__webpack_exports__);
         email: email,
         password: password
       });
+      $('#register-modal').modal('hide');
     }
   }
 });
@@ -40679,75 +40680,77 @@ var render = function () {
               ),
               _c("hr"),
               _vm._v(" "),
-              _c("div", { staticClass: "card my-4" }, [
-                _c("h5", { staticClass: "card-header" }, [
-                  _vm._v("Leave a Comment:"),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("form", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.post_id,
-                          expression: "post_id",
-                        },
-                      ],
-                      attrs: { type: "hidden" },
-                      domProps: { value: _vm.post_id },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.post_id = $event.target.value
-                        },
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.body,
-                            expression: "body",
-                          },
-                        ],
-                        staticClass: "form-control",
-                        attrs: { rows: "3" },
-                        domProps: { value: _vm.body },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.body = $event.target.value
-                          },
-                        },
-                      }),
+              _vm.isLogged
+                ? _c("div", { staticClass: "card my-4" }, [
+                    _c("h5", { staticClass: "card-header" }, [
+                      _vm._v("Leave a Comment:"),
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit" },
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.addComment.apply(null, arguments)
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("form", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.post_id,
+                              expression: "post_id",
+                            },
+                          ],
+                          attrs: { type: "hidden" },
+                          domProps: { value: _vm.post_id },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.post_id = $event.target.value
+                            },
                           },
-                        },
-                      },
-                      [_vm._v("Submit")]
-                    ),
-                  ]),
-                ]),
-              ]),
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.body,
+                                expression: "body",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: { rows: "3" },
+                            domProps: { value: _vm.body },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.body = $event.target.value
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.addComment.apply(null, arguments)
+                              },
+                            },
+                          },
+                          [_vm._v("Submit")]
+                        ),
+                      ]),
+                    ]),
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm._l(_vm.post.data.comments, function (single_post) {
                 return _c(

@@ -31,7 +31,7 @@
                                         <small v-show="emailError" class="text-danger">The email is not valid</small>
                                     </div>
                                 </div>
-                            
+
                                 <div class="form-group">
                                     <input type="password" class="form-control" placeholder="Password" v-model="password">
                                     <div>
@@ -64,7 +64,7 @@
              firstname: '',
              lastname: '',
              email: '',
-             password: '',   
+             password: '',
             }
         },
         computed:{
@@ -77,7 +77,7 @@
             emailError(){
                 //axios
                 return !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) && this.email.length > 0
-    
+
             },
             passwordError(){
                 return this.password.length>0 && this.password.length < 8
@@ -91,6 +91,7 @@
                 // console.log(this.$store.getters.isLogged)
                 let {firstname ,lastname,email,password} = this;
                 this.$store.dispatch('registerUser',{firstname ,lastname,email,password})
+                $('#register-modal').modal('hide')
             }
         }
     }
