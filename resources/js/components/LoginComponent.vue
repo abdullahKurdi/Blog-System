@@ -49,14 +49,14 @@
         data(){
             return{
              email: '',
-             password: '',   
+             password: '',
             }
         },
         computed:{
             emailError(){
                 //axios
                 return !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) && this.email.length > 0
-    
+
             },
             passwordError(){
                 return this.password.length>0 && this.password.length < 8
@@ -69,7 +69,18 @@
                 console.log('submited')
                 let {email,password} = this;
                 this.$store.dispatch('loginUser',{email,password})
-            }
+                let token = JSON.parse(localStorage.getItem('userToken'));
+            if(token){
+                axios.get('/api/user')
+                .then(res => {
+                    //console.log(res.data)
+                    this.$store.commit('setUser', res.data.user);
+                });
+                };
+                $('#login-modal').modal('hide')
+            },
+
+
         }
     }
 </script>

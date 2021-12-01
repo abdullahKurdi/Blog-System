@@ -100,8 +100,13 @@ import Category from './CategoryComponent.vue'
             }
         },
         components:{
-        
+
             Category
+        },
+        computed:{
+            isLogged(){
+                return this.$store.getters.isLogged;
+            }    
         }
     }
 </script>

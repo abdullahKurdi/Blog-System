@@ -66,7 +66,7 @@ class AuthController extends Controller
 
     public function authenticatedUserDetails(){
         //returns details
-        return response()->json(['authenticated-user' => auth()->user()], 200);
+        return response()->json(['user' => auth()->user()], 200);
     }
 
 }

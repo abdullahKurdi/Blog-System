@@ -16,7 +16,7 @@
 
             <!-- Date/Time -->
             <p>Posted on <strong class="badge badge-primary p-1">{{post.data.added_at}}</strong>
-                <span class="float-right"><strong class="badge badge-info p-1">{{post.data.comments_count}}</strong> Comments</span></p>
+                <span class="float-right"><strong class="badge badge-info p-1">{{comments.length}}</strong> Comments</span></p>
 
             <hr>
 
@@ -34,10 +34,11 @@
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
                     <form>
+                        <input type="hidden" v-model="post_id">
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea class="form-control" rows="3" v-model="body"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="addComment">Submit</button>
                     </form>
                 </div>
             </div>
@@ -66,22 +67,56 @@
 </template>
 
 <script>
+
     export default {
         name:'post',
         data(){
             return{
-                post:''
+                post:'',
+                post_id:'',
+                body:'',
+                comments:[]
+
             }
         },
         created(){
             this.getPost();
+            this.updateToken()
         },
         methods:{
             getPost:function(){
                 axios.get('/api/posts/'+this.$route.params.slug)
-                    .then(res => {this.post = res.data;})
+                    .then(res => {
+                        this.post = res.data; 
+                        this.post_id =this.post.data.id
+                        this.comments = this.post.data.comments
+                        })
                     .catch(err => {this.post = err.data;})
+            },
+            addComment:function(){
+            let{body,post_id} = this;
+            axios.post('/api/comment/create',{body,post_id})
+                    .then(res => {
+                        console.log(res.data)
+                        this.comments.unshift(res.data)
+                        })
+                    .catch(err => {console.log (err) })
+            },
+            updateToken(){
+                let token = JSON.parse(localStorage.getItem('userToken'));
+                this.$store.commit('userLoggedin',token);
             }
         },
+        computed:{
+            isLogged(){
+                return this.$store.getters.isLogged;
+            }    
+        },
+        computed:{
+            isLogged(){
+                return this.$store.getters.isLogged;
+            }    
+        }
+        
     }
 </script>

@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 import Post from "../components/PostComponent";
 import Posts from "../components/PostsComponent";
 import CategoryPosts from "../components/CategoryPostsComponent";
+import AdminIndex from "../components/admin/AdminIndex";
 
 const routes =[
     {
@@ -22,6 +23,11 @@ const routes =[
         path:'/category/:slug/posts',
         component:CategoryPosts,
         name:'CategoryPosts'
+    },
+    {
+        path:'/admin',
+        component:AdminIndex,
+        name:'AdminIndex'
     }
 
 ];

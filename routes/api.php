@@ -28,4 +28,16 @@ Route::post('/login' , 'Frontend\AuthController@login');
 Route::post('/register' , 'Frontend\AuthController@register');
 Route::group(['middleware'=>'auth:api'],function(){
     Route::get('user',  'Frontend\AuthController@authenticatedUserDetails');
+    Route::post('comment/create',  'Frontend\CommentController@store');
+
+});
+
+Route::group(['prefix'=>'admin' , 'middleware'=>'auth:api'] ,function (){
+    Route::get('/posts' ,       ['as'=>'admin.getPost',            'uses'=>'Frontend\AdminController@getPost']);
+    Route::get('/categories' ,  ['as'=>'admin.getCategory',        'uses'=>'Frontend\AdminController@getCategory']);
+
+    Route::post('/add-post' ,       ['as'=>'admin.addPost',             'uses'=>'Frontend\AdminController@addPost']);
+    Route::post('/update-post' ,    ['as'=>'admin.updatePost',             'uses'=>'Frontend\AdminController@updatePost']);
+    Route::post('/delete-posts' ,   ['as'=>'admin.deletePost',             'uses'=>'Frontend\AdminController@deletePosts']);
+
 });

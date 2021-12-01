@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -35,7 +37,21 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validations
+
+        $comment = Comment::create([
+            'body'=>$request->body,
+            'user_id'=>Auth::id(),
+            'post_id'=>$request->post_id,
+        ]);
+
+        return response()->json([
+            'msg'=>'success',
+            'id'=>$comment->id,
+            'body'=>$comment->body,
+            'user'=>$comment->user,
+            'added_at'=>$comment->created_at->diffForHumans(),
+        ]);
     }
 
     /**
